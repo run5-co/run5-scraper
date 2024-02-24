@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "esnext",
+        "lib": [
+            "esnext"
+        ],
+        "types": [
+            "@cloudflare/workers-types/2023-07-01"
+        ],
+        "strict": true,
+        "rootDir": ".",
+        "outDir": "./dist",
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "noImplicitReturns": true,
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true
+    },
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

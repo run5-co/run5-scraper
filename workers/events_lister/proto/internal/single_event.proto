@@ -1,0 +1,24 @@
+// Internal Proto spec. This proto is not a publicly exposed API and therefore may have breaking spec changes.
+
+syntax = "proto3";
+
+message Location {
+  message GeoCoordinates {
+    float latitude = 1;
+    float longitude = 2;
+  }
+  GeoCoordinates geo_coordinates = 1;
+}
+
+message ParkrunEvent {
+  message Name {
+    string short_name = 1;
+    string long_name = 2;
+    string localised_name = 3;
+  }
+
+  string id = 1;
+  string country_url = 2;
+  Name name = 3;
+  Location location = 4;
+}

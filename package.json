@@ -1,0 +1,5 @@
+{
+	"devDependencies": {
+		"miniflare": "^3.20240129.1"
+	}
+}

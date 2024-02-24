@@ -1,0 +1,93 @@
+// Internal Proto spec. This proto is not a publicly exposed API and therefore may have breaking spec changes.
+
+syntax = "proto3";
+
+message AugmentedParkrunEvent {
+  enum DayOfWeek {
+    DAY_OF_WEEK_UNSPECIFIED = 0; // The day of the week is unspecified.
+    MONDAY = 1; // Monday
+    TUESDAY = 2; // Tuesday
+    WEDNESDAY = 3; // Wednesday
+    THURSDAY = 4; // Thursday
+    FRIDAY = 5; // Friday
+    SATURDAY = 6; // Saturday
+    SUNDAY = 7; // Sunday
+  }
+  enum ParkrunType {
+    PARKRUN_TYPE_UNSPECIFIED = 0;
+    STANDARD = 1;
+    JUNIORS = 2;
+  }
+
+  message LocalizedText {
+    // Localized string in the language corresponding to `language_code' below.
+    string text = 1;
+
+    // The text's BCP-47 language code, such as "en-US" or "sr-Latn". http://www.unicode.org/reports/tr35/#Unicode_locale_identifier
+    string language_code = 2;
+  }
+
+  message LatLng {
+    // The latitude in degrees. It must be in the range [-90.0, +90.0].
+    double latitude = 1;
+
+    // The longitude in degrees. It must be in the range [-180.0, +180.0].
+    double longitude = 2;
+  }
+
+  message Location {
+    LatLng latlng = 1;
+    // Country Code such as "US", "GB", "NL". https://en.wikipedia.org/wiki/ISO_3166-2
+    string country_code = 2;
+    string descriptor = 3;
+  }
+
+  message Distance {
+    uint32 km = 1;
+    uint32 m = 2;
+  }
+
+  message Course {
+    Distance distance = 1;
+    string google_maps_mid = 2;
+  }
+
+  message TimeOfDay {
+    // Hours of day in 24 hour format. Should be from 0 to 23. An API may choose
+    // to allow the value "24:00:00" for scenarios like business closing time.
+    int32 hours = 1;
+
+    // Minutes of hour of day. Must be from 0 to 59.
+    int32 minutes = 2;
+
+    // Seconds of minutes of the time. Must normally be from 0 to 59. An API may
+    // allow the value 60 if it allows leap-seconds.
+    int32 seconds = 3;
+
+    // Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.
+    int32 nanos = 4;
+  }
+
+  message TimeZone {
+    // IANA Time Zone Database time zone, e.g. "America/New_York".
+    string id = 1;
+
+    // Optional. IANA Time Zone Database version number, e.g. "2019a".
+    string version = 2;
+  }
+
+  message WeeklyOccurence {
+    TimeOfDay time_of_day = 1;
+    DayOfWeek day_of_week = 2;
+    TimeZone time_zone = 3;
+  }
+
+  string id = 1;
+  ParkrunType parkrun_type = 2;
+  repeated LocalizedText full_name = 3;
+  Location location = 4;
+  string url = 5;
+  string email = 6;
+  Course course = 7;
+  WeeklyOccurence weekly_occurence = 8;
+}
